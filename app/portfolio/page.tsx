@@ -218,6 +218,8 @@ function SectionHeader({
 export default function PortfolioPage() {
   const [activeLetter, setActiveLetter] = useState("A");
   const [typedText, setTypedText] = useState("");
+  const [activeProject, setActiveProject] = useState<string | null>(null);
+  const [activeSkill, setActiveSkill] = useState<string | null>(null);
 
   const activePhrase = useMemo(() => phrases[activeLetter], [activeLetter]);
 
@@ -380,7 +382,9 @@ export default function PortfolioPage() {
                 key={row.join("")}
                 className={[
                   "flex justify-center gap-1.5 sm:gap-2 md:gap-5",
-                  rowIndex === 1 ? "translate-x-3 sm:translate-x-4 md:translate-x-8" : "",
+                  rowIndex === 1
+                    ? "translate-x-3 sm:translate-x-4 md:translate-x-8"
+                    : "",
                   rowIndex === 2 ? "translate-x-0" : "",
                 ].join(" ")}
               >
@@ -469,79 +473,112 @@ export default function PortfolioPage() {
         </section>
       </section>
 
-      <section id="work" className="relative z-10 px-4 py-16 sm:px-6 md:px-12 md:py-20">
+      <section
+        id="work"
+        className="relative z-10 px-4 py-16 sm:px-6 md:px-12 md:py-20"
+      >
         <div className="mx-auto max-w-6xl border-t border-black/20 pt-12 md:pt-14">
           <SectionHeader label="Work" title="Featured projects" />
 
           <div className="grid gap-6 md:gap-7">
-            {projects.map((project) => (
-              <article
-                key={project.name}
-                className="grid overflow-hidden border border-black/20 bg-[#faf9f4]/80 backdrop-blur transition hover:border-[#2563eb] md:grid-cols-[0.55fr_0.45fr]"
-              >
-                <div className="relative min-h-[220px] border-b border-black/20 bg-black sm:min-h-[280px] md:min-h-[360px] md:border-b-0 md:border-r">
-                  <Image
-                    src={project.image}
-                    alt={`${project.name} screenshot`}
-                    fill
-                    className="object-cover object-left-top grayscale transition duration-700 hover:grayscale-0"
-                  />
-                </div>
+            {projects.map((project) => {
+              const isActive = activeProject === project.name;
 
-                <div className="p-5 sm:p-6 md:p-8">
-                  <div className="mb-8 flex items-center justify-between gap-3 font-mono text-[10px] uppercase tracking-[0.18em] text-[#777] md:mb-12 md:text-xs md:tracking-[0.22em]">
-                    <span>{project.number}</span>
-                    <span className="text-right">{project.type}</span>
+              return (
+                <article
+                  key={project.name}
+                  onMouseEnter={() => setActiveProject(project.name)}
+                  onMouseLeave={() => setActiveProject(null)}
+                  onFocus={() => setActiveProject(project.name)}
+                  onBlur={() => setActiveProject(null)}
+                  onTouchStart={() => setActiveProject(project.name)}
+                  className={[
+                    "grid overflow-hidden border bg-[#faf9f4]/80 backdrop-blur transition duration-300 md:grid-cols-[0.55fr_0.45fr]",
+                    isActive
+                      ? "border-[#2563eb]"
+                      : "border-black/20 hover:border-[#2563eb]",
+                  ].join(" ")}
+                >
+                  <div className="relative min-h-[220px] border-b border-black/20 bg-black sm:min-h-[280px] md:min-h-[360px] md:border-b-0 md:border-r">
+                    <Image
+                      src={project.image}
+                      alt={`${project.name} screenshot`}
+                      fill
+                      className={[
+                        "object-cover object-left-top transition duration-700",
+                        isActive ? "grayscale-0" : "grayscale",
+                      ].join(" ")}
+                    />
                   </div>
 
-                  <h3 className="text-4xl font-semibold tracking-[-0.05em] md:text-5xl">
-                    {project.name}
-                  </h3>
+                  <div className="p-5 sm:p-6 md:p-8">
+                    <div className="mb-8 flex items-center justify-between gap-3 font-mono text-[10px] uppercase tracking-[0.18em] text-[#777] md:mb-12 md:text-xs md:tracking-[0.22em]">
+                      <span>{project.number}</span>
+                      <span className="text-right">{project.type}</span>
+                    </div>
 
-                  <p className="mt-4 max-w-md text-sm leading-7 text-[#555] md:mt-5">
-                    {project.description}
-                  </p>
+                    <h3
+                      className={[
+                        "text-4xl font-semibold tracking-[-0.05em] transition md:text-5xl",
+                        isActive ? "text-[#2563eb]" : "text-[#171717]",
+                      ].join(" ")}
+                    >
+                      {project.name}
+                    </h3>
 
-                  <div className="mt-5 flex flex-wrap gap-2 md:mt-6">
-                    {project.stack.map((item) => (
-                      <span
-                        key={item}
-                        className="border border-black/20 px-3 py-2 font-mono text-[9px] uppercase tracking-[0.14em] text-[#555] md:text-[10px] md:tracking-[0.16em]"
-                      >
-                        {item}
-                      </span>
-                    ))}
-                  </div>
+                    <p className="mt-4 max-w-md text-sm leading-7 text-[#555] md:mt-5">
+                      {project.description}
+                    </p>
 
-                  <div className="mt-7 flex gap-4 md:mt-8 md:gap-3">
-                    {project.liveUrl && (
+                    <div className="mt-5 flex flex-wrap gap-2 md:mt-6">
+                      {project.stack.map((item) => (
+                        <span
+                          key={item}
+                          className={[
+                            "border px-3 py-2 font-mono text-[9px] uppercase tracking-[0.14em] transition md:text-[10px] md:tracking-[0.16em]",
+                            isActive
+                              ? "border-[#2563eb]/45 text-[#2563eb]"
+                              : "border-black/20 text-[#555]",
+                          ].join(" ")}
+                        >
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+
+                    <div className="mt-7 flex gap-4 md:mt-8 md:gap-3">
+                      {project.liveUrl && (
+                        <a
+                          href={project.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="font-mono text-[11px] uppercase tracking-[0.18em] underline underline-offset-4 hover:text-[#2563eb] md:text-xs md:tracking-[0.2em]"
+                        >
+                          Live
+                        </a>
+                      )}
+
                       <a
-                        href={project.liveUrl}
+                        href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="font-mono text-[11px] uppercase tracking-[0.18em] underline underline-offset-4 hover:text-[#2563eb] md:text-xs md:tracking-[0.2em]"
                       >
-                        Live
+                        GitHub
                       </a>
-                    )}
-
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="font-mono text-[11px] uppercase tracking-[0.18em] underline underline-offset-4 hover:text-[#2563eb] md:text-xs md:tracking-[0.2em]"
-                    >
-                      GitHub
-                    </a>
+                    </div>
                   </div>
-                </div>
-              </article>
-            ))}
+                </article>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      <section id="about" className="relative z-10 px-4 py-16 sm:px-6 md:px-12 md:py-20">
+      <section
+        id="about"
+        className="relative z-10 px-4 py-16 sm:px-6 md:px-12 md:py-20"
+      >
         <div className="mx-auto max-w-6xl border-t border-black/20 pt-12 md:pt-14">
           <SectionHeader label="About" title="Profile" />
 
@@ -610,54 +647,80 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      <section id="stack" className="relative z-10 px-4 py-16 sm:px-6 md:px-12 md:py-20">
+      <section
+        id="stack"
+        className="relative z-10 px-4 py-16 sm:px-6 md:px-12 md:py-20"
+      >
         <div className="mx-auto max-w-6xl border-t border-black/20 pt-12 md:pt-14">
           <SectionHeader label="Stack" title="Tools" />
 
           <div className="relative min-h-[470px] md:min-h-[460px]">
-            {skills.map((skill, index) => (
-              <motion.div
-                key={skill.name}
-                initial={{ opacity: 0, y: 24, rotate: 0 }}
-                whileInView={{
-                  opacity: 1,
-                  y: 0,
-                  rotate: Number(skill.rotate.replace("deg", "")),
-                }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{
-                  duration: 0.45,
-                  delay: index * 0.055,
-                  ease: "easeOut",
-                }}
-                whileHover={{
-                  y: -12,
-                  rotate: Number(skill.rotate.replace("deg", "")) * 0.35,
-                  scale: 1.035,
-                  zIndex: 20,
-                }}
-                whileTap={{ scale: 0.97 }}
-                className={[
-                  "absolute top-0 inline-flex w-[220px] items-center justify-between border border-black/70 bg-[#faf9f4] px-5 py-3.5 font-mono text-base lowercase tracking-[-0.03em] shadow-[7px_9px_0_rgba(0,0,0,0.08)] transition hover:border-[#2563eb] hover:text-[#2563eb]",
-                  "sm:w-[260px] sm:px-6 sm:text-lg",
-                  "md:w-[315px] md:px-7 md:py-4 md:text-xl md:shadow-[8px_10px_0_rgba(0,0,0,0.08)]",
-                  skill.x,
-                  skill.y,
-                  skill.z,
-                ].join(" ")}
-                style={{ rotate: skill.rotate }}
-              >
-                <span>{skill.name}</span>
-                <span className="text-[10px] uppercase tracking-[0.18em] text-[#777] md:text-xs md:tracking-[0.2em]">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-              </motion.div>
-            ))}
+            {skills.map((skill, index) => {
+              const isActive = activeSkill === skill.name;
+
+              return (
+                <motion.div
+                  key={skill.name}
+                  onTouchStart={() => setActiveSkill(skill.name)}
+                  onMouseEnter={() => setActiveSkill(skill.name)}
+                  onMouseLeave={() => setActiveSkill(null)}
+                  initial={{ opacity: 0, y: 24, rotate: 0 }}
+                  whileInView={{
+                    opacity: 1,
+                    y: 0,
+                    rotate: Number(skill.rotate.replace("deg", "")),
+                  }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  animate={
+                    isActive
+                      ? {
+                          y: -12,
+                          rotate:
+                            Number(skill.rotate.replace("deg", "")) * 0.35,
+                          scale: 1.035,
+                          zIndex: 20,
+                        }
+                      : {
+                          y: 0,
+                          rotate: Number(skill.rotate.replace("deg", "")),
+                          scale: 1,
+                          zIndex: Number(skill.z.match(/\d+/)?.[0] ?? 1),
+                        }
+                  }
+                  transition={{
+                    duration: 0.45,
+                    delay: index * 0.055,
+                    ease: "easeOut",
+                  }}
+                  whileTap={{ scale: 0.97 }}
+                  className={[
+                    "absolute top-0 inline-flex w-[220px] items-center justify-between border bg-[#faf9f4] px-5 py-3.5 font-mono text-base lowercase tracking-[-0.03em] shadow-[7px_9px_0_rgba(0,0,0,0.08)] transition hover:border-[#2563eb] hover:text-[#2563eb]",
+                    "sm:w-[260px] sm:px-6 sm:text-lg",
+                    "md:w-[315px] md:px-7 md:py-4 md:text-xl md:shadow-[8px_10px_0_rgba(0,0,0,0.08)]",
+                    isActive
+                      ? "border-[#2563eb] text-[#2563eb]"
+                      : "border-black/70 text-[#171717]",
+                    skill.x,
+                    skill.y,
+                    skill.z,
+                  ].join(" ")}
+                  style={{ rotate: skill.rotate }}
+                >
+                  <span>{skill.name}</span>
+                  <span className="text-[10px] uppercase tracking-[0.18em] text-[#777] md:text-xs md:tracking-[0.2em]">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      <section id="contact" className="relative z-10 px-4 pb-8 pt-16 sm:px-6 md:px-12 md:pt-20">
+      <section
+        id="contact"
+        className="relative z-10 px-4 pb-8 pt-16 sm:px-6 md:px-12 md:pt-20"
+      >
         <div className="mx-auto w-full max-w-6xl border-t border-black/20 pt-12 md:pt-14">
           <SectionHeader label="Contact" title="Let's Connect" />
 
