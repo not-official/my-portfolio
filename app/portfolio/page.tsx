@@ -157,6 +157,13 @@ const phrases: Record<string, string> = {
   Z: "Zero templates. Just built work.",
 };
 
+const navItems = [
+  ["Work", "#work"],
+  ["About", "#about"],
+  ["Resume", "/Aman-CK-CV.pdf"],
+  ["Contact", "#contact"],
+];
+
 function MailIcon() {
   return (
     <svg
@@ -214,6 +221,26 @@ export default function PortfolioPage() {
 
   const activePhrase = useMemo(() => phrases[activeLetter], [activeLetter]);
 
+  const scrollToSection = (sectionId: string) => {
+    const section = document.querySelector(sectionId);
+
+    if (section) {
+      section.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  };
+
+  const handleNavigation = (href: string) => {
+    if (href.startsWith("#")) {
+      scrollToSection(href);
+      return;
+    }
+
+    window.open(href, "_blank", "noopener,noreferrer");
+  };
+
   useEffect(() => {
     setTypedText("");
 
@@ -230,6 +257,37 @@ export default function PortfolioPage() {
 
     return () => window.clearInterval(interval);
   }, [activePhrase]);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      const key = event.key.toUpperCase();
+
+      if (phrases[key]) {
+        setActiveLetter(key);
+        return;
+      }
+
+      if (event.key === "1") {
+        scrollToSection("#work");
+      }
+
+      if (event.key === "2") {
+        scrollToSection("#about");
+      }
+
+      if (event.key === "3") {
+        window.open("/Aman-CK-CV.pdf", "_blank", "noopener,noreferrer");
+      }
+
+      if (event.key === "4") {
+        scrollToSection("#contact");
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   return (
     <main className="min-h-screen bg-[#faf9f4] text-[#171717]">
@@ -255,20 +313,17 @@ export default function PortfolioPage() {
             <div className="mt-1 h-16 w-px bg-black/20" />
 
             <nav className="flex flex-col items-end gap-1 font-mono text-[12px] font-semibold uppercase tracking-[0.32em]">
-              {[
-                ["Work", "#work"],
-                ["About", "#about"],
-                ["Resume", "/Aman-CK-CV.pdf"],
-                ["Contact", "#contact"],
-              ].map(([label, href], index) => (
+              {navItems.map(([label, href], index) => (
                 <a
                   key={label}
                   href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  onClick={(event) => {
+                    event.preventDefault();
+                    handleNavigation(href);
+                  }}
                   className="group flex items-center gap-3 transition hover:text-[#2563eb]"
                 >
-                  <span className="text-[10px] text-[#9a9a9a]">
+                  <span className="text-[10px] text-[#9a9a9a] transition group-hover:text-[#2563eb]">
                     0{index + 1}
                   </span>
                   <span>{label}</span>
@@ -329,10 +384,10 @@ export default function PortfolioPage() {
                       animate={
                         isActive
                           ? {
-                              y: 5,
+                              y: -5,
                               rotate: -1,
                               boxShadow:
-                                "0 2px 0 #181818, 0 10px 16px rgba(0,0,0,0.22)",
+                                "0 9px 0 #1f1f1f, 0 24px 34px rgba(0,0,0,0.24)",
                             }
                           : {
                               y: 0,
@@ -380,8 +435,10 @@ export default function PortfolioPage() {
           <div className="mt-14 flex flex-wrap justify-center gap-3">
             <a
               href="#work"
-              target="_blank"
-              rel="noopener noreferrer"
+              onClick={(event) => {
+                event.preventDefault();
+                scrollToSection("#work");
+              }}
               className="border border-[#171717] bg-[#171717] px-5 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-[#faf9f4] transition hover:bg-[#2563eb] hover:text-white"
             >
               View Work
@@ -526,8 +583,10 @@ export default function PortfolioPage() {
 
                 <a
                   href="#contact"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  onClick={(event) => {
+                    event.preventDefault();
+                    scrollToSection("#contact");
+                  }}
                   className="border border-[#171717] px-5 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] transition hover:bg-[#171717] hover:text-[#faf9f4]"
                 >
                   Contact
