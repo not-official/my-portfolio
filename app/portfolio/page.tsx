@@ -304,8 +304,8 @@ export default function PortfolioPage() {
             className="group relative font-mono text-[12px] font-semibold uppercase leading-[2.05] tracking-[0.32em]"
           >
             <span className="block">Aman CK</span>
+            <span className="block text-[#6f6f6f]">Portfolio Page</span>
             <span className="block text-[#6f6f6f]">Computer Engineering</span>
-            <span className="block text-[#6f6f6f]">Paschimanchal Campus</span>
             <span className="absolute -bottom-2 left-0 h-px w-0 bg-[#2563eb] transition-all duration-300 group-hover:w-full" />
           </Link>
 
@@ -446,7 +446,6 @@ export default function PortfolioPage() {
 
             <Link
               href="/"
-              target="_blank"
               rel="noopener noreferrer"
               className="border border-[#171717] px-5 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.22em] transition hover:bg-[#171717] hover:text-[#faf9f4]"
             >

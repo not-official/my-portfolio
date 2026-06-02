@@ -8,7 +8,20 @@ const GRID_SIZE = 3;
 const TILE_COUNT = GRID_SIZE * GRID_SIZE;
 const EMPTY_TILE = TILE_COUNT - 1;
 
-const IMAGE_URL = "/puzzles/ben10.jpg";
+const PUZZLES = [
+  {
+    name: "Gate X",
+    imageUrl: "/puzzles/ben10.jpg",
+  },
+  {
+    name: "Gate Y",
+    imageUrl: "/puzzles/spiderman.jpg",
+  },
+  {
+    name: "Gate Z",
+    imageUrl: "/puzzles/harrypotter.jpg",
+  },
+];
 
 const PHRASES = ["Solve.", "Unlock.", "Enter."];
 
@@ -78,6 +91,9 @@ export default function PuzzleGate() {
   const [moves, setMoves] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
   const [phraseIndex, setPhraseIndex] = useState(0);
+  const [selectedPuzzleIndex, setSelectedPuzzleIndex] = useState(0);
+
+  const selectedPuzzle = PUZZLES[selectedPuzzleIndex];
 
   useEffect(() => {
     setMounted(true);
@@ -127,6 +143,13 @@ export default function PuzzleGate() {
     setIsComplete(false);
   }
 
+  function choosePuzzle(index: number) {
+    setSelectedPuzzleIndex(index);
+    setTiles(shuffleTiles());
+    setMoves(0);
+    setIsComplete(false);
+  }
+
   if (!mounted || tiles.length === 0) {
     return (
       <main className="flex min-h-screen items-center justify-center bg-[#faf9f4] text-[#171717]">
@@ -156,9 +179,20 @@ export default function PuzzleGate() {
             <span className="absolute -bottom-2 left-0 h-px w-0 bg-[#2563eb] transition-all duration-300 group-hover:w-full" />
           </Link>
 
-          <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.28em] text-[#6f6f6f] md:text-[12px] md:tracking-[0.36em]">
-            {isComplete ? "Open" : "Locked"}
-          </span>
+          <div className="flex flex-col items-end">
+            <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.28em] text-[#6f6f6f] md:text-[12px] md:tracking-[0.36em]">
+              {isComplete ? "Open" : "Locked"}
+            </span>
+
+            {!isComplete && (
+              <Link
+                href="/portfolio"
+                className="mt-3 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-[#9a9a9a] underline underline-offset-4 transition hover:text-[#2563eb]"
+              >
+                Give up and skip?
+              </Link>
+            )}
+          </div>
         </header>
 
         <section className="flex flex-1 items-center justify-center py-10 text-center md:py-12">
@@ -180,8 +214,29 @@ export default function PuzzleGate() {
               </div>
 
               <p className="mx-auto max-w-xs font-mono text-[11px] font-semibold uppercase leading-5 tracking-[0.18em] text-[#777]">
-                Complete the image to continue.
+                Complete a gate to continue .
               </p>
+            </div>
+
+            <div className="mb-6 flex flex-wrap justify-center gap-2">
+              {PUZZLES.map((puzzle, index) => {
+                const isActive = selectedPuzzleIndex === index;
+
+                return (
+                  <button
+                    key={puzzle.name}
+                    onClick={() => choosePuzzle(index)}
+                    className={[
+                      "border px-4 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] transition",
+                      isActive
+                        ? "border-[#171717] bg-[#171717] text-[#faf9f4]"
+                        : "border-black/20 bg-[#faf9f4]/80 text-[#777] hover:border-[#2563eb] hover:text-[#2563eb]",
+                    ].join(" ")}
+                  >
+                    {puzzle.name}
+                  </button>
+                );
+              })}
             </div>
 
             <motion.div
@@ -215,7 +270,7 @@ export default function PuzzleGate() {
                     transition={{ duration: 0.75, ease: "easeOut" }}
                     className="absolute inset-2 bg-cover bg-center"
                     style={{
-                      backgroundImage: `url(${IMAGE_URL})`,
+                      backgroundImage: `url(${selectedPuzzle.imageUrl})`,
                     }}
                   />
 
@@ -287,7 +342,7 @@ export default function PuzzleGate() {
                               <div
                                 className="absolute inset-0 bg-cover"
                                 style={{
-                                  backgroundImage: `url(${IMAGE_URL})`,
+                                  backgroundImage: `url(${selectedPuzzle.imageUrl})`,
                                   backgroundSize: `${GRID_SIZE * 100}% ${
                                     GRID_SIZE * 100
                                   }%`,
