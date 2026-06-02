@@ -203,8 +203,8 @@ function SectionHeader({
   title: string;
 }) {
   return (
-    <div className="mb-10 border-b border-black/20 pb-5">
-      <p className="font-mono text-xs font-semibold uppercase tracking-[0.28em] text-[#777]">
+    <div className="mb-8 border-b border-black/20 pb-5 md:mb-10">
+      <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.24em] text-[#777] md:text-xs md:tracking-[0.28em]">
         {label}
       </p>
 
@@ -290,18 +290,18 @@ export default function PortfolioPage() {
   }, []);
 
   return (
-    <main className="min-h-screen bg-[#faf9f4] text-[#171717]">
+    <main className="min-h-screen overflow-x-hidden bg-[#faf9f4] text-[#171717]">
       <div className="pointer-events-none fixed inset-0 opacity-60">
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.045)_1px,transparent_1px)] bg-[size:76px_76px]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(0,0,0,0.16)_1.5px,transparent_2px)] bg-[size:76px_76px]" />
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.045)_1px,transparent_1px)] bg-[size:52px_52px] md:bg-[size:76px_76px]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(0,0,0,0.16)_1.2px,transparent_2px)] bg-[size:52px_52px] md:bg-[size:76px_76px]" />
       </div>
 
-      <section className="relative z-10 min-h-screen px-6 py-7 md:px-12">
-        <header className="flex items-start justify-between">
+      <section className="relative z-10 min-h-screen px-4 py-5 sm:px-6 sm:py-6 md:px-12 md:py-7">
+        <header className="flex items-start justify-between gap-4">
           <Link
             href="/portfolio"
             rel="noopener noreferrer"
-            className="group relative font-mono text-[12px] font-semibold uppercase leading-[2.05] tracking-[0.32em]"
+            className="group relative font-mono text-[10px] font-semibold uppercase leading-[1.9] tracking-[0.24em] sm:text-[11px] sm:tracking-[0.28em] md:text-[12px] md:leading-[2.05] md:tracking-[0.32em]"
           >
             <span className="block">Aman CK</span>
             <span className="block text-[#6f6f6f]">Portfolio Page</span>
@@ -333,15 +333,27 @@ export default function PortfolioPage() {
             </nav>
           </div>
 
-          <button className="font-mono text-[11px] font-semibold uppercase tracking-[0.24em] md:hidden">
-            Menu
-          </button>
+          <nav className="grid grid-cols-2 gap-2 font-mono text-[9px] font-semibold uppercase tracking-[0.14em] md:hidden">
+            {navItems.map(([label, href], index) => (
+              <a
+                key={label}
+                href={href}
+                onClick={(event) => {
+                  event.preventDefault();
+                  handleNavigation(href);
+                }}
+                className="border border-black/20 bg-[#faf9f4]/70 px-2.5 py-2 text-center text-[#777] backdrop-blur transition hover:border-[#2563eb] hover:text-[#2563eb]"
+              >
+                0{index + 1}
+              </a>
+            ))}
+          </nav>
         </header>
 
-        <section className="flex min-h-[calc(100vh-140px)] flex-col items-center justify-center text-center">
-          <div className="mb-10 flex items-center justify-center">
-            <div className="h-8 w-20 border-t-[3px] border-[#171717]" />
-            <div className="mx-4 h-8 w-20 border-t-[3px] border-[#171717]" />
+        <section className="flex min-h-[calc(100vh-118px)] flex-col items-center justify-center py-8 text-center md:min-h-[calc(100vh-140px)] md:py-0">
+          <div className="mb-6 flex items-center justify-center md:mb-10">
+            <div className="h-6 w-14 border-t-[3px] border-[#171717] md:h-8 md:w-20" />
+            <div className="mx-3 h-6 w-14 border-t-[3px] border-[#171717] md:mx-4 md:h-8 md:w-20" />
           </div>
 
           <motion.h1
@@ -349,26 +361,26 @@ export default function PortfolioPage() {
             initial={{ opacity: 0, y: 8, filter: "blur(4px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ duration: 0.35, ease: "easeOut" }}
-            className="relative mx-auto min-h-[124px] max-w-5xl font-mono text-[clamp(1.9rem,4.7vw,4.5rem)] font-semibold leading-[1.22] tracking-[0.11em] text-[#2a2a2a]"
+            className="relative mx-auto min-h-[88px] max-w-[92vw] font-mono text-[clamp(1.45rem,7.4vw,2.45rem)] font-semibold leading-[1.25] tracking-[0.07em] text-[#2a2a2a] sm:min-h-[104px] sm:text-[clamp(1.8rem,6vw,3.2rem)] md:min-h-[124px] md:max-w-5xl md:text-[clamp(1.9rem,4.7vw,4.5rem)] md:tracking-[0.11em]"
           >
             <span className="text-[#7a7a7a]">|</span>
             {typedText}
             <motion.span
               animate={{ opacity: [0, 1, 0] }}
               transition={{ repeat: Infinity, duration: 0.9 }}
-              className="ml-2 text-[#7a7a7a]"
+              className="ml-1.5 text-[#7a7a7a] md:ml-2"
             >
               |
             </motion.span>
           </motion.h1>
 
-          <div className="mt-12 flex flex-col items-center gap-5">
+          <div className="mt-8 flex w-full flex-col items-center gap-3 sm:gap-4 md:mt-12 md:gap-5">
             {keyboardRows.map((row, rowIndex) => (
               <div
                 key={row.join("")}
                 className={[
-                  "flex gap-4 md:gap-5",
-                  rowIndex === 1 ? "translate-x-6 md:translate-x-8" : "",
+                  "flex justify-center gap-1.5 sm:gap-2 md:gap-5",
+                  rowIndex === 1 ? "translate-x-3 sm:translate-x-4 md:translate-x-8" : "",
                   rowIndex === 2 ? "translate-x-0" : "",
                 ].join(" ")}
               >
@@ -380,20 +392,20 @@ export default function PortfolioPage() {
                       key={letter}
                       onClick={() => setActiveLetter(letter)}
                       whileHover={{ y: -5 }}
-                      whileTap={{ y: 6, scale: 0.94 }}
+                      whileTap={{ y: 5, scale: 0.94 }}
                       animate={
                         isActive
                           ? {
-                              y: -5,
+                              y: -4,
                               rotate: -1,
                               boxShadow:
-                                "0 9px 0 #1f1f1f, 0 24px 34px rgba(0,0,0,0.24)",
+                                "0 6px 0 #1f1f1f, 0 16px 22px rgba(0,0,0,0.22)",
                             }
                           : {
                               y: 0,
                               rotate: 0,
                               boxShadow:
-                                "0 7px 0 #1f1f1f, 0 20px 28px rgba(0,0,0,0.22)",
+                                "0 5px 0 #1f1f1f, 0 14px 18px rgba(0,0,0,0.2)",
                             }
                       }
                       transition={{
@@ -402,10 +414,12 @@ export default function PortfolioPage() {
                         damping: 24,
                       }}
                       className={[
-                        "relative h-[56px] w-[56px] rounded-full bg-[#202020] p-[5px] transition md:h-[68px] md:w-[68px]",
-                        "border-[3px] border-[#1a1a1a]",
-                        "before:pointer-events-none before:absolute before:inset-[4px] before:rounded-full before:border before:border-white/15 before:content-['']",
-                        "after:pointer-events-none after:absolute after:inset-[-6px] after:-z-10 after:rounded-full after:bg-black/10 after:blur-[2px] after:content-['']",
+                        "relative h-[32px] w-[32px] rounded-full bg-[#202020] p-[3px] transition",
+                        "border-2 border-[#1a1a1a]",
+                        "before:pointer-events-none before:absolute before:inset-[3px] before:rounded-full before:border before:border-white/15 before:content-['']",
+                        "after:pointer-events-none after:absolute after:inset-[-4px] after:-z-10 after:rounded-full after:bg-black/10 after:blur-[2px] after:content-['']",
+                        "sm:h-[42px] sm:w-[42px] sm:p-[4px]",
+                        "md:h-[68px] md:w-[68px] md:border-[3px] md:p-[5px]",
                       ].join(" ")}
                       aria-label={`Typewriter key ${letter}`}
                     >
@@ -413,8 +427,8 @@ export default function PortfolioPage() {
                         className={[
                           "relative z-10 flex h-full w-full items-center justify-center rounded-full",
                           "border border-[#9f9688] bg-[#eee7d9]",
-                          "font-serif text-[22px] font-semibold leading-none md:text-[26px]",
-                          "shadow-[inset_3px_3px_6px_rgba(255,255,255,0.95),inset_-4px_-5px_8px_rgba(0,0,0,0.2)]",
+                          "font-serif text-[14px] font-semibold leading-none sm:text-[18px] md:text-[26px]",
+                          "shadow-[inset_2px_2px_4px_rgba(255,255,255,0.95),inset_-3px_-4px_7px_rgba(0,0,0,0.18)] md:shadow-[inset_3px_3px_6px_rgba(255,255,255,0.95),inset_-4px_-5px_8px_rgba(0,0,0,0.2)]",
                           isActive
                             ? "text-[#2563eb]"
                             : "text-[#2f2f2f] hover:text-[#2563eb]",
@@ -422,7 +436,7 @@ export default function PortfolioPage() {
                       >
                         <span className="relative">
                           {letter}
-                          <span className="absolute -bottom-1 left-1/2 h-px w-3 -translate-x-1/2 bg-black/20" />
+                          <span className="absolute -bottom-1 left-1/2 h-px w-2 -translate-x-1/2 bg-black/20 md:w-3" />
                         </span>
                       </span>
                     </motion.button>
@@ -432,14 +446,14 @@ export default function PortfolioPage() {
             ))}
           </div>
 
-          <div className="mt-14 flex flex-wrap justify-center gap-3">
+          <div className="mt-10 flex flex-wrap justify-center gap-3 md:mt-14">
             <a
               href="#work"
               onClick={(event) => {
                 event.preventDefault();
                 scrollToSection("#work");
               }}
-              className="border border-[#171717] bg-[#171717] px-5 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-[#faf9f4] transition hover:bg-[#2563eb] hover:text-white"
+              className="border border-[#171717] bg-[#171717] px-4 py-3 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-[#faf9f4] transition hover:bg-[#2563eb] hover:text-white md:px-5 md:text-[11px] md:tracking-[0.22em]"
             >
               View Work
             </a>
@@ -447,7 +461,7 @@ export default function PortfolioPage() {
             <Link
               href="/"
               rel="noopener noreferrer"
-              className="border border-[#171717] px-5 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.22em] transition hover:bg-[#171717] hover:text-[#faf9f4]"
+              className="border border-[#171717] px-4 py-3 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] transition hover:bg-[#171717] hover:text-[#faf9f4] md:px-5 md:text-[11px] md:tracking-[0.22em]"
             >
               Back to Gate
             </Link>
@@ -455,17 +469,17 @@ export default function PortfolioPage() {
         </section>
       </section>
 
-      <section id="work" className="relative z-10 px-6 py-20 md:px-12">
-        <div className="mx-auto max-w-6xl border-t border-black/20 pt-14">
+      <section id="work" className="relative z-10 px-4 py-16 sm:px-6 md:px-12 md:py-20">
+        <div className="mx-auto max-w-6xl border-t border-black/20 pt-12 md:pt-14">
           <SectionHeader label="Work" title="Featured projects" />
 
-          <div className="grid gap-7">
+          <div className="grid gap-6 md:gap-7">
             {projects.map((project) => (
               <article
                 key={project.name}
                 className="grid overflow-hidden border border-black/20 bg-[#faf9f4]/80 backdrop-blur transition hover:border-[#2563eb] md:grid-cols-[0.55fr_0.45fr]"
               >
-                <div className="relative min-h-[260px] border-b border-black/20 bg-black md:min-h-[360px] md:border-b-0 md:border-r">
+                <div className="relative min-h-[220px] border-b border-black/20 bg-black sm:min-h-[280px] md:min-h-[360px] md:border-b-0 md:border-r">
                   <Image
                     src={project.image}
                     alt={`${project.name} screenshot`}
@@ -474,38 +488,38 @@ export default function PortfolioPage() {
                   />
                 </div>
 
-                <div className="p-6 md:p-8">
-                  <div className="mb-12 flex items-center justify-between font-mono text-xs uppercase tracking-[0.22em] text-[#777]">
+                <div className="p-5 sm:p-6 md:p-8">
+                  <div className="mb-8 flex items-center justify-between gap-3 font-mono text-[10px] uppercase tracking-[0.18em] text-[#777] md:mb-12 md:text-xs md:tracking-[0.22em]">
                     <span>{project.number}</span>
-                    <span>{project.type}</span>
+                    <span className="text-right">{project.type}</span>
                   </div>
 
                   <h3 className="text-4xl font-semibold tracking-[-0.05em] md:text-5xl">
                     {project.name}
                   </h3>
 
-                  <p className="mt-5 max-w-md text-sm leading-7 text-[#555]">
+                  <p className="mt-4 max-w-md text-sm leading-7 text-[#555] md:mt-5">
                     {project.description}
                   </p>
 
-                  <div className="mt-6 flex flex-wrap gap-2">
+                  <div className="mt-5 flex flex-wrap gap-2 md:mt-6">
                     {project.stack.map((item) => (
                       <span
                         key={item}
-                        className="border border-black/20 px-3 py-2 font-mono text-[10px] uppercase tracking-[0.16em] text-[#555]"
+                        className="border border-black/20 px-3 py-2 font-mono text-[9px] uppercase tracking-[0.14em] text-[#555] md:text-[10px] md:tracking-[0.16em]"
                       >
                         {item}
                       </span>
                     ))}
                   </div>
 
-                  <div className="mt-8 flex gap-3">
+                  <div className="mt-7 flex gap-4 md:mt-8 md:gap-3">
                     {project.liveUrl && (
                       <a
                         href={project.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="font-mono text-xs uppercase tracking-[0.2em] underline underline-offset-4 hover:text-[#2563eb]"
+                        className="font-mono text-[11px] uppercase tracking-[0.18em] underline underline-offset-4 hover:text-[#2563eb] md:text-xs md:tracking-[0.2em]"
                       >
                         Live
                       </a>
@@ -515,7 +529,7 @@ export default function PortfolioPage() {
                       href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="font-mono text-xs uppercase tracking-[0.2em] underline underline-offset-4 hover:text-[#2563eb]"
+                      className="font-mono text-[11px] uppercase tracking-[0.18em] underline underline-offset-4 hover:text-[#2563eb] md:text-xs md:tracking-[0.2em]"
                     >
                       GitHub
                     </a>
@@ -527,15 +541,15 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      <section id="about" className="relative z-10 px-6 py-20 md:px-12">
-        <div className="mx-auto max-w-6xl border-t border-black/20 pt-14">
+      <section id="about" className="relative z-10 px-4 py-16 sm:px-6 md:px-12 md:py-20">
+        <div className="mx-auto max-w-6xl border-t border-black/20 pt-12 md:pt-14">
           <SectionHeader label="About" title="Profile" />
 
           <div className="grid gap-10 md:grid-cols-[0.42fr_0.58fr] md:items-start">
-            <div className="relative">
-              <div className="absolute -left-3 -top-3 z-0 h-full w-full border border-black/20 bg-[#ece7dc]" />
+            <div className="relative mx-auto w-full max-w-[360px] md:max-w-none">
+              <div className="absolute -left-2 -top-2 z-0 h-full w-full border border-black/20 bg-[#ece7dc] md:-left-3 md:-top-3" />
 
-              <div className="relative z-10 overflow-hidden border border-black/25 bg-[#faf9f4]/80 p-3 backdrop-blur">
+              <div className="relative z-10 overflow-hidden border border-black/25 bg-[#faf9f4]/80 p-2 backdrop-blur md:p-3">
                 <div className="relative aspect-[4/5] overflow-hidden bg-[#e9e4d8]">
                   <Image
                     src="/profile/aman-portrait.png"
@@ -548,11 +562,11 @@ export default function PortfolioPage() {
             </div>
 
             <div>
-              <p className="max-w-2xl text-2xl font-semibold leading-[1.25] tracking-[-0.04em] text-[#171717] md:text-4xl">
+              <p className="max-w-2xl text-3xl font-semibold leading-[1.18] tracking-[-0.04em] text-[#171717] md:text-4xl md:leading-[1.25]">
                 I like building things that make ideas feel real.
               </p>
 
-              <div className="mt-7 space-y-5 text-base leading-8 text-[#444]">
+              <div className="mt-6 space-y-5 text-sm leading-7 text-[#444] sm:text-base sm:leading-8 md:mt-7">
                 <p>
                   I am Aman CK, a Computer Engineering graduate from
                   Paschimanchal Campus. I am passionate about turning ideas into
@@ -570,12 +584,12 @@ export default function PortfolioPage() {
                 </p>
               </div>
 
-              <div className="mt-8 flex flex-wrap gap-3">
+              <div className="mt-7 flex flex-wrap gap-3 md:mt-8">
                 <a
                   href="/Aman-CK-CV.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="border border-[#171717] bg-[#171717] px-5 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-[#faf9f4] transition hover:bg-[#2563eb] hover:text-white"
+                  className="border border-[#171717] bg-[#171717] px-4 py-3 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-[#faf9f4] transition hover:bg-[#2563eb] hover:text-white md:px-5 md:text-[11px] md:tracking-[0.2em]"
                 >
                   Resume
                 </a>
@@ -586,7 +600,7 @@ export default function PortfolioPage() {
                     event.preventDefault();
                     scrollToSection("#contact");
                   }}
-                  className="border border-[#171717] px-5 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] transition hover:bg-[#171717] hover:text-[#faf9f4]"
+                  className="border border-[#171717] px-4 py-3 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] transition hover:bg-[#171717] hover:text-[#faf9f4] md:px-5 md:text-[11px] md:tracking-[0.2em]"
                 >
                   Contact
                 </a>
@@ -596,8 +610,8 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      <section id="stack" className="relative z-10 px-6 py-20 md:px-12">
-        <div className="mx-auto max-w-6xl border-t border-black/20 pt-14">
+      <section id="stack" className="relative z-10 px-4 py-16 sm:px-6 md:px-12 md:py-20">
+        <div className="mx-auto max-w-6xl border-t border-black/20 pt-12 md:pt-14">
           <SectionHeader label="Stack" title="Tools" />
 
           <div className="relative min-h-[470px] md:min-h-[460px]">
@@ -624,7 +638,9 @@ export default function PortfolioPage() {
                 }}
                 whileTap={{ scale: 0.97 }}
                 className={[
-                  "absolute top-0 inline-flex w-[250px] items-center justify-between border border-black/70 bg-[#faf9f4] px-7 py-4 font-mono text-lg lowercase tracking-[-0.03em] shadow-[8px_10px_0_rgba(0,0,0,0.08)] transition hover:border-[#2563eb] hover:text-[#2563eb] md:w-[315px] md:text-xl",
+                  "absolute top-0 inline-flex w-[220px] items-center justify-between border border-black/70 bg-[#faf9f4] px-5 py-3.5 font-mono text-base lowercase tracking-[-0.03em] shadow-[7px_9px_0_rgba(0,0,0,0.08)] transition hover:border-[#2563eb] hover:text-[#2563eb]",
+                  "sm:w-[260px] sm:px-6 sm:text-lg",
+                  "md:w-[315px] md:px-7 md:py-4 md:text-xl md:shadow-[8px_10px_0_rgba(0,0,0,0.08)]",
                   skill.x,
                   skill.y,
                   skill.z,
@@ -632,7 +648,7 @@ export default function PortfolioPage() {
                 style={{ rotate: skill.rotate }}
               >
                 <span>{skill.name}</span>
-                <span className="text-xs uppercase tracking-[0.2em] text-[#777]">
+                <span className="text-[10px] uppercase tracking-[0.18em] text-[#777] md:text-xs md:tracking-[0.2em]">
                   {String(index + 1).padStart(2, "0")}
                 </span>
               </motion.div>
@@ -641,42 +657,44 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      <section id="contact" className="relative z-10 px-6 pb-8 pt-20 md:px-12">
-        <div className="mx-auto w-full max-w-6xl border-t border-black/20 pt-14">
+      <section id="contact" className="relative z-10 px-4 pb-8 pt-16 sm:px-6 md:px-12 md:pt-20">
+        <div className="mx-auto w-full max-w-6xl border-t border-black/20 pt-12 md:pt-14">
           <SectionHeader label="Contact" title="Let's Connect" />
 
-          <div className="relative min-h-[270px] border-b border-black/30">
-            <a
-              href="https://github.com/not-official"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="absolute right-24 top-0 inline-flex rotate-[-7deg] items-center gap-3 border border-black/70 bg-[#faf9f4] px-8 py-3 font-mono text-xl lowercase tracking-[-0.04em] transition hover:-translate-y-1 hover:border-[#2563eb] hover:text-[#2563eb]"
-            >
-              <GitHubIcon />
-              github
-            </a>
+          <div className="relative border-b border-black/30 pb-10 md:min-h-[270px] md:pb-0">
+            <div className="flex flex-col items-end gap-4 md:block">
+              <a
+                href="https://github.com/not-official"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex rotate-[-2deg] items-center gap-3 border border-black/70 bg-[#faf9f4] px-6 py-3 font-mono text-lg lowercase tracking-[-0.04em] transition hover:-translate-y-1 hover:border-[#2563eb] hover:text-[#2563eb] md:absolute md:right-24 md:top-0 md:rotate-[-7deg] md:px-8 md:text-xl"
+              >
+                <GitHubIcon />
+                github
+              </a>
 
-            <a
-              href="https://www.linkedin.com/in/aman-ck-1655bb410/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="absolute right-0 top-16 inline-flex rotate-[3deg] items-center gap-3 border border-black/70 bg-[#faf9f4] px-8 py-3 font-mono text-xl lowercase tracking-[-0.04em] transition hover:-translate-y-1 hover:border-[#2563eb] hover:text-[#2563eb]"
-            >
-              <LinkedInIcon />
-              linkedin
-            </a>
+              <a
+                href="https://www.linkedin.com/in/aman-ck-1655bb410/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex rotate-[2deg] items-center gap-3 border border-black/70 bg-[#faf9f4] px-6 py-3 font-mono text-lg lowercase tracking-[-0.04em] transition hover:-translate-y-1 hover:border-[#2563eb] hover:text-[#2563eb] md:absolute md:right-0 md:top-16 md:rotate-[3deg] md:px-8 md:text-xl"
+              >
+                <LinkedInIcon />
+                linkedin
+              </a>
 
-            <a
-              href="mailto:ckaman108@gmail.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="absolute right-44 top-24 inline-flex rotate-[-4deg] items-center gap-3 border border-black/70 bg-[#faf9f4] px-8 py-3 font-mono text-xl lowercase tracking-[-0.04em] transition hover:-translate-y-1 hover:border-[#2563eb] hover:text-[#2563eb]"
-            >
-              <MailIcon />
-              email
-            </a>
+              <a
+                href="mailto:ckaman108@gmail.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex rotate-[-2deg] items-center gap-3 border border-black/70 bg-[#faf9f4] px-6 py-3 font-mono text-lg lowercase tracking-[-0.04em] transition hover:-translate-y-1 hover:border-[#2563eb] hover:text-[#2563eb] md:absolute md:right-44 md:top-24 md:rotate-[-4deg] md:px-8 md:text-xl"
+              >
+                <MailIcon />
+                email
+              </a>
+            </div>
 
-            <p className="absolute bottom-8 left-0 font-mono text-[11px] uppercase tracking-[0.22em] text-[#777]">
+            <p className="mt-10 font-mono text-[10px] uppercase tracking-[0.2em] text-[#777] md:absolute md:bottom-8 md:left-0 md:mt-0 md:text-[11px] md:tracking-[0.22em]">
               © Aman CK
             </p>
           </div>

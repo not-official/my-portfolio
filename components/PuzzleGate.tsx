@@ -161,17 +161,17 @@ export default function PuzzleGate() {
   }
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#faf9f4] text-[#171717]">
+    <main className="relative min-h-screen overflow-x-hidden bg-[#faf9f4] text-[#171717]">
       <div className="pointer-events-none absolute inset-0 opacity-60">
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.045)_1px,transparent_1px)] bg-[size:76px_76px]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(0,0,0,0.16)_1.5px,transparent_2px)] bg-[size:76px_76px]" />
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.045)_1px,transparent_1px)] bg-[size:52px_52px] md:bg-[size:76px_76px]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(0,0,0,0.16)_1.2px,transparent_2px)] bg-[size:52px_52px] md:bg-[size:76px_76px]" />
       </div>
 
-      <section className="relative z-10 flex min-h-screen flex-col px-6 py-7 md:px-12">
-        <header className="flex items-start justify-between">
+      <section className="relative z-10 flex min-h-screen flex-col px-4 py-5 sm:px-6 sm:py-6 md:px-12 md:py-7">
+        <header className="flex items-start justify-between gap-4">
           <Link
             href="/"
-            className="group relative font-mono text-[12px] font-semibold uppercase leading-[2.05] tracking-[0.32em]"
+            className="group relative font-mono text-[10px] font-semibold uppercase leading-[1.9] tracking-[0.24em] sm:text-[11px] sm:tracking-[0.28em] md:text-[12px] md:leading-[2.05] md:tracking-[0.32em]"
           >
             <span className="block">Aman CK</span>
             <span className="block text-[#6f6f6f]">Portfolio Gate</span>
@@ -179,26 +179,26 @@ export default function PuzzleGate() {
             <span className="absolute -bottom-2 left-0 h-px w-0 bg-[#2563eb] transition-all duration-300 group-hover:w-full" />
           </Link>
 
-          <div className="flex flex-col items-end">
-            <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.28em] text-[#6f6f6f] md:text-[12px] md:tracking-[0.36em]">
+          <div className="flex shrink-0 flex-col items-end text-right">
+            <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-[#6f6f6f] sm:text-[11px] sm:tracking-[0.28em] md:text-[12px] md:tracking-[0.36em]">
               {isComplete ? "Open" : "Locked"}
             </span>
 
             {!isComplete && (
               <Link
                 href="/portfolio"
-                className="mt-3 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-[#9a9a9a] underline underline-offset-4 transition hover:text-[#2563eb]"
+                className="mt-2 max-w-[130px] font-mono text-[9px] font-semibold uppercase leading-4 tracking-[0.14em] text-[#9a9a9a] underline underline-offset-4 transition hover:text-[#2563eb] sm:max-w-none sm:text-[10px] sm:tracking-[0.18em]"
               >
-                Give up and skip?
+                Give up & skip?
               </Link>
             )}
           </div>
         </header>
 
-        <section className="flex flex-1 items-center justify-center py-10 text-center md:py-12">
+        <section className="flex flex-1 items-center justify-center py-7 text-center sm:py-9 md:py-12">
           <div className="w-full max-w-[500px]">
-            <div className="mb-8">
-              <div className="mb-4 h-[56px] overflow-hidden md:h-[72px]">
+            <div className="mb-5 sm:mb-7 md:mb-8">
+              <div className="mb-3 h-[44px] overflow-hidden sm:h-[56px] md:h-[72px]">
                 <AnimatePresence mode="wait">
                   <motion.p
                     key={PHRASES[phraseIndex]}
@@ -206,19 +206,19 @@ export default function PuzzleGate() {
                     animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                     exit={{ opacity: 0, y: -14, filter: "blur(5px)" }}
                     transition={{ duration: 0.45, ease: "easeOut" }}
-                    className="text-5xl font-semibold leading-none tracking-[-0.06em] text-[#171717] md:text-7xl"
+                    className="text-[44px] font-semibold leading-none tracking-[-0.06em] text-[#171717] sm:text-5xl md:text-7xl"
                   >
                     {PHRASES[phraseIndex]}
                   </motion.p>
                 </AnimatePresence>
               </div>
 
-              <p className="mx-auto max-w-xs font-mono text-[11px] font-semibold uppercase leading-5 tracking-[0.18em] text-[#777]">
-                Complete a gate to continue .
+              <p className="mx-auto max-w-[260px] font-mono text-[10px] font-semibold uppercase leading-5 tracking-[0.15em] text-[#777] sm:max-w-xs sm:text-[11px] sm:tracking-[0.18em]">
+                Complete a gate to continue.
               </p>
             </div>
 
-            <div className="mb-6 flex flex-wrap justify-center gap-2">
+            <div className="mb-4 flex flex-wrap justify-center gap-2 sm:mb-6">
               {PUZZLES.map((puzzle, index) => {
                 const isActive = selectedPuzzleIndex === index;
 
@@ -227,7 +227,7 @@ export default function PuzzleGate() {
                     key={puzzle.name}
                     onClick={() => choosePuzzle(index)}
                     className={[
-                      "border px-4 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] transition",
+                      "min-w-[86px] border px-3 py-2 font-mono text-[9px] font-semibold uppercase tracking-[0.14em] transition sm:min-w-[96px] sm:px-4 sm:text-[10px] sm:tracking-[0.16em]",
                       isActive
                         ? "border-[#171717] bg-[#171717] text-[#faf9f4]"
                         : "border-black/20 bg-[#faf9f4]/80 text-[#777] hover:border-[#2563eb] hover:text-[#2563eb]",
@@ -243,12 +243,12 @@ export default function PuzzleGate() {
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, ease: "easeOut" }}
-              className="relative"
+              className="relative mx-auto w-full max-w-[min(100%,420px)] sm:max-w-[460px] md:max-w-[500px]"
             >
-              <div className="absolute -left-3 -top-3 z-0 h-full w-full border border-black/20 bg-[#ece7dc]" />
+              <div className="absolute -left-2 -top-2 z-0 h-full w-full border border-black/20 bg-[#ece7dc] sm:-left-3 sm:-top-3" />
 
-              <div className="relative z-10 border border-black/25 bg-[#faf9f4]/85 p-3 backdrop-blur">
-                <div className="mb-3 flex items-center justify-between border-b border-black/15 pb-3 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-[#777]">
+              <div className="relative z-10 border border-black/25 bg-[#faf9f4]/85 p-2 backdrop-blur sm:p-3">
+                <div className="mb-2 flex items-center justify-between border-b border-black/15 pb-2 font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-[#777] sm:mb-3 sm:pb-3 sm:text-[10px] sm:tracking-[0.16em]">
                   <button
                     onClick={resetPuzzle}
                     className="transition hover:text-[#2563eb]"
@@ -259,7 +259,7 @@ export default function PuzzleGate() {
                   <span>{moves} Moves</span>
                 </div>
 
-                <div className="relative aspect-square bg-[#171717] p-2">
+                <div className="relative aspect-square bg-[#171717] p-1.5 sm:p-2">
                   <motion.div
                     initial={false}
                     animate={
@@ -268,7 +268,7 @@ export default function PuzzleGate() {
                         : { opacity: 0, scale: 0.985 }
                     }
                     transition={{ duration: 0.75, ease: "easeOut" }}
-                    className="absolute inset-2 bg-cover bg-center"
+                    className="absolute inset-1.5 bg-cover bg-center sm:inset-2"
                     style={{
                       backgroundImage: `url(${selectedPuzzle.imageUrl})`,
                     }}
@@ -290,7 +290,7 @@ export default function PuzzleGate() {
                           }
                     }
                     transition={{ duration: 0.65, ease: "easeOut" }}
-                    className="grid h-full grid-cols-3 gap-2"
+                    className="grid h-full grid-cols-3 gap-1.5 sm:gap-2"
                   >
                     {tiles.map((tile, index) => {
                       const isEmpty = tile === EMPTY_TILE;
@@ -352,7 +352,7 @@ export default function PuzzleGate() {
                                 }}
                               />
 
-                              <span className="pointer-events-none absolute left-2 top-2 font-mono text-[10px] font-semibold leading-none text-white/80 drop-shadow-[0_1px_2px_rgba(0,0,0,0.75)] md:text-[11px]">
+                              <span className="pointer-events-none absolute left-1.5 top-1.5 font-mono text-[9px] font-semibold leading-none text-white/80 drop-shadow-[0_1px_2px_rgba(0,0,0,0.75)] sm:left-2 sm:top-2 sm:text-[10px] md:text-[11px]">
                                 {tile + 1}
                               </span>
                             </>
@@ -372,11 +372,11 @@ export default function PuzzleGate() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 12 }}
                   transition={{ duration: 0.35 }}
-                  className="mt-8 text-center"
+                  className="mt-6 text-center sm:mt-8"
                 >
                   <Link
                     href="/portfolio"
-                    className="inline-flex border border-[#171717] bg-[#171717] px-6 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-[#faf9f4] transition hover:bg-[#2563eb] hover:text-white"
+                    className="inline-flex border border-[#171717] bg-[#171717] px-5 py-3 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-[#faf9f4] transition hover:bg-[#2563eb] hover:text-white sm:px-6 sm:text-[11px] sm:tracking-[0.22em]"
                   >
                     Enter Portfolio
                   </Link>
