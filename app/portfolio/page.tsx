@@ -242,7 +242,6 @@ export default function PortfolioPage() {
         <header className="flex items-start justify-between">
           <Link
             href="/portfolio"
-            target="_blank"
             rel="noopener noreferrer"
             className="group relative font-mono text-[12px] font-semibold uppercase leading-[2.05] tracking-[0.32em]"
           >
