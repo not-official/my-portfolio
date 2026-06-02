@@ -290,73 +290,81 @@ export default function PuzzleGate() {
                           }
                     }
                     transition={{ duration: 0.65, ease: "easeOut" }}
-                    className="grid h-full grid-cols-3 gap-1.5 sm:gap-2"
+                    className="absolute inset-1.5 overflow-hidden sm:inset-2"
                   >
                     {tiles.map((tile, index) => {
                       const isEmpty = tile === EMPTY_TILE;
 
+                      const currentRow = getRow(index);
+                      const currentCol = getCol(index);
                       const originalRow = getRow(tile);
                       const originalCol = getCol(tile);
 
                       const isMovable =
                         canMove(index, emptyIndex) && !isEmpty && !isComplete;
 
+                      if (isEmpty) {
+                        return null;
+                      }
+
                       return (
                         <motion.button
-                          layout
                           key={tile}
                           onClick={() => handleTileClick(index)}
-                          disabled={isEmpty}
+                          disabled={!isMovable}
+                          initial={false}
+                          animate={{
+                            x: `${currentCol * 100}%`,
+                            y: `${currentRow * 100}%`,
+                          }}
+                          transition={{
+                            type: "spring",
+                            stiffness: 260,
+                            damping: 32,
+                            mass: 0.85,
+                          }}
                           whileHover={
                             isMovable
                               ? {
-                                  y: -3,
+                                  scale: 1.015,
                                   boxShadow:
-                                    "0 10px 18px rgba(0,0,0,0.18)",
+                                    "0 12px 22px rgba(0,0,0,0.18)",
                                 }
                               : {}
                           }
                           whileTap={isMovable ? { scale: 0.985 } : {}}
-                          transition={{
-                            layout: {
-                              type: "spring",
-                              stiffness: 420,
-                              damping: 32,
-                            },
-                          }}
                           className={[
-                            "relative overflow-hidden border transition",
-                            isEmpty
-                              ? "border-black/10 bg-[#faf9f4]"
-                              : "border-black/25 bg-[#171717]",
-                            isMovable
-                              ? "cursor-pointer hover:border-[#2563eb]"
-                              : "cursor-default",
+                            "absolute left-0 top-0 h-1/3 w-1/3 p-[3px] outline-none",
+                            "will-change-transform transform-gpu",
+                            isMovable ? "cursor-pointer" : "cursor-default",
                           ].join(" ")}
-                          aria-label={
-                            isEmpty ? "Empty tile" : `Puzzle tile ${tile + 1}`
-                          }
+                          aria-label={`Puzzle tile ${tile + 1}`}
                         >
-                          {!isEmpty && (
-                            <>
-                              <div
-                                className="absolute inset-0 bg-cover"
-                                style={{
-                                  backgroundImage: `url(${selectedPuzzle.imageUrl})`,
-                                  backgroundSize: `${GRID_SIZE * 100}% ${
-                                    GRID_SIZE * 100
-                                  }%`,
-                                  backgroundPosition: `${originalCol * 50}% ${
-                                    originalRow * 50
-                                  }%`,
-                                }}
-                              />
+                          <div
+                            className={[
+                              "relative h-full w-full overflow-hidden border bg-[#171717] transition",
+                              isMovable
+                                ? "border-black/25 hover:border-[#2563eb]"
+                                : "border-black/20",
+                            ].join(" ")}
+                          >
+                            <div
+                              className="absolute inset-0 bg-cover"
+                              style={{
+                                backgroundImage: `url(${selectedPuzzle.imageUrl})`,
+                                backgroundSize: `${GRID_SIZE * 100}% ${
+                                  GRID_SIZE * 100
+                                }%`,
+                                backgroundPosition: `${originalCol * 50}% ${
+                                  originalRow * 50
+                                }%`,
+                              }}
+                            />
 
-                              <span className="pointer-events-none absolute left-1.5 top-1.5 font-mono text-[9px] font-semibold leading-none text-white/80 drop-shadow-[0_1px_2px_rgba(0,0,0,0.75)] sm:left-2 sm:top-2 sm:text-[10px] md:text-[11px]">
-                                {tile + 1}
-                              </span>
-                            </>
-                          )}
+                            <span className="pointer-events-none absolute left-1.5 top-1.5 font-mono text-[9px] font-semibold leading-none text-white/80 drop-shadow-[0_1px_2px_rgba(0,0,0,0.75)] sm:left-2 sm:top-2 sm:text-[10px] md:text-[11px]">
+                              {tile + 1}
+                            </span>
+                          </div>
                         </motion.button>
                       );
                     })}
