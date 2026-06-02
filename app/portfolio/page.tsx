@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 type Project = {
   number: string;
@@ -15,6 +15,12 @@ type Project = {
   liveUrl?: string;
   githubUrl: string;
 };
+
+type WebAudioWindow = Window & {
+  webkitAudioContext?: typeof AudioContext;
+};
+
+const TYPE_INTERVAL_MS = 74;
 
 const projects: Project[] = [
   {
@@ -220,8 +226,121 @@ export default function PortfolioPage() {
   const [typedText, setTypedText] = useState("");
   const [activeProject, setActiveProject] = useState<string | null>(null);
   const [activeSkill, setActiveSkill] = useState<string | null>(null);
+  const [soundEnabled, setSoundEnabled] = useState(false);
+  const [typingRun, setTypingRun] = useState(0);
+
+  const audioContextRef = useRef<AudioContext | null>(null);
+  const soundEnabledRef = useRef(false);
 
   const activePhrase = useMemo(() => phrases[activeLetter], [activeLetter]);
+
+  useEffect(() => {
+    soundEnabledRef.current = soundEnabled;
+  }, [soundEnabled]);
+
+  function getAudioContext() {
+    if (typeof window === "undefined") return null;
+
+    if (!audioContextRef.current) {
+      const AudioContextClass =
+        window.AudioContext || (window as WebAudioWindow).webkitAudioContext;
+
+      if (!AudioContextClass) return null;
+
+      audioContextRef.current = new AudioContextClass();
+    }
+
+    return audioContextRef.current;
+  }
+
+  function playTypeSound() {
+    if (!soundEnabledRef.current) return;
+
+    const audioContext = getAudioContext();
+
+    if (!audioContext) return;
+
+    if (audioContext.state === "suspended") {
+      audioContext.resume().catch(() => {});
+    }
+
+    const now = audioContext.currentTime;
+
+    const clickOscillator = audioContext.createOscillator();
+    const clickGain = audioContext.createGain();
+    const clickFilter = audioContext.createBiquadFilter();
+
+    clickOscillator.type = "square";
+    clickOscillator.frequency.setValueAtTime(1350, now);
+    clickOscillator.frequency.exponentialRampToValueAtTime(720, now + 0.018);
+
+    clickFilter.type = "bandpass";
+    clickFilter.frequency.setValueAtTime(1200, now);
+    clickFilter.Q.setValueAtTime(2.4, now);
+
+    clickGain.gain.setValueAtTime(0.0001, now);
+    clickGain.gain.exponentialRampToValueAtTime(0.045, now + 0.004);
+    clickGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.032);
+
+    clickOscillator.connect(clickFilter);
+    clickFilter.connect(clickGain);
+    clickGain.connect(audioContext.destination);
+
+    clickOscillator.start(now);
+    clickOscillator.stop(now + 0.034);
+
+    const thockOscillator = audioContext.createOscillator();
+    const thockGain = audioContext.createGain();
+    const thockFilter = audioContext.createBiquadFilter();
+
+    thockOscillator.type = "triangle";
+    thockOscillator.frequency.setValueAtTime(170, now);
+
+    thockFilter.type = "lowpass";
+    thockFilter.frequency.setValueAtTime(520, now);
+
+    thockGain.gain.setValueAtTime(0.0001, now);
+    thockGain.gain.exponentialRampToValueAtTime(0.018, now + 0.006);
+    thockGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.045);
+
+    thockOscillator.connect(thockFilter);
+    thockFilter.connect(thockGain);
+    thockGain.connect(audioContext.destination);
+
+    thockOscillator.start(now);
+    thockOscillator.stop(now + 0.05);
+  }
+
+  function replayTyping() {
+    setTypedText("");
+    setTypingRun((current) => current + 1);
+  }
+
+  function toggleSound() {
+    const nextValue = !soundEnabledRef.current;
+
+    soundEnabledRef.current = nextValue;
+    setSoundEnabled(nextValue);
+
+    if (nextValue) {
+      const audioContext = getAudioContext();
+
+      if (audioContext?.state === "suspended") {
+        audioContext.resume().catch(() => {});
+      }
+
+      playTypeSound();
+      replayTyping();
+    }
+  }
+
+  function selectLetter(letter: string) {
+    setActiveLetter(letter);
+
+    if (letter === activeLetter) {
+      replayTyping();
+    }
+  }
 
   const scrollToSection = (sectionId: string) => {
     const section = document.querySelector(sectionId);
@@ -250,22 +369,23 @@ export default function PortfolioPage() {
 
     const interval = window.setInterval(() => {
       setTypedText(activePhrase.slice(0, index + 1));
+      playTypeSound();
       index += 1;
 
       if (index >= activePhrase.length) {
         window.clearInterval(interval);
       }
-    }, 34);
+    }, TYPE_INTERVAL_MS);
 
     return () => window.clearInterval(interval);
-  }, [activePhrase]);
+  }, [activePhrase, typingRun]);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       const key = event.key.toUpperCase();
 
       if (phrases[key]) {
-        setActiveLetter(key);
+        selectLetter(key);
         return;
       }
 
@@ -289,7 +409,7 @@ export default function PortfolioPage() {
     window.addEventListener("keydown", handleKeyDown);
 
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  }, [activeLetter]);
 
   return (
     <main className="min-h-screen overflow-x-hidden bg-[#faf9f4] text-[#171717]">
@@ -359,7 +479,7 @@ export default function PortfolioPage() {
           </div>
 
           <motion.h1
-            key={activePhrase}
+            key={`${activePhrase}-${typingRun}`}
             initial={{ opacity: 0, y: 8, filter: "blur(4px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ duration: 0.35, ease: "easeOut" }}
@@ -394,7 +514,7 @@ export default function PortfolioPage() {
                   return (
                     <motion.button
                       key={letter}
-                      onClick={() => setActiveLetter(letter)}
+                      onClick={() => selectLetter(letter)}
                       whileHover={{ y: -5 }}
                       whileTap={{ y: 5, scale: 0.94 }}
                       animate={
@@ -449,6 +569,41 @@ export default function PortfolioPage() {
               </div>
             ))}
           </div>
+
+          <button
+            onClick={toggleSound}
+            aria-pressed={soundEnabled}
+            className={[
+              "group mt-6 inline-flex items-center gap-3 border px-3 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] shadow-[5px_6px_0_rgba(0,0,0,0.06)] transition hover:-translate-y-0.5",
+              soundEnabled
+                ? "border-[#171717] bg-[#171717] text-[#faf9f4]"
+                : "border-black/20 bg-[#faf9f4]/85 text-[#777] hover:border-[#2563eb] hover:text-[#2563eb]",
+            ].join(" ")}
+          >
+            <span className="text-[9px] tracking-[0.2em]">Type Sound</span>
+
+            <span
+              className={[
+                "relative h-[18px] w-[38px] border transition",
+                soundEnabled
+                  ? "border-[#faf9f4]/70 bg-[#faf9f4]/10"
+                  : "border-black/25 bg-black/[0.03] group-hover:border-[#2563eb]/50",
+              ].join(" ")}
+            >
+              <span
+                className={[
+                  "absolute top-1/2 h-[10px] w-[10px] -translate-y-1/2 transition-all duration-300",
+                  soundEnabled
+                    ? "left-[22px] bg-[#faf9f4]"
+                    : "left-[4px] bg-[#777] group-hover:bg-[#2563eb]",
+                ].join(" ")}
+              />
+            </span>
+
+            <span className="min-w-[24px] text-left">
+              {soundEnabled ? "On" : "Off"}
+            </span>
+          </button>
 
           <div className="mt-10 flex flex-wrap justify-center gap-3 md:mt-14">
             <a
