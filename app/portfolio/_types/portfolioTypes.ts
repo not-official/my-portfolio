@@ -1,3 +1,5 @@
+import type { IconType } from "react-icons";
+
 export type Project = {
   number: string;
   name: string;
@@ -11,6 +13,7 @@ export type Project = {
 
 export type Skill = {
   name: string;
+  icon: IconType;
   rotate: string;
   y: string;
   x: string;
