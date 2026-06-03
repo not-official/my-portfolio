@@ -28,8 +28,8 @@ const projects: Project[] = [
     name: "BinaryPot",
     type: "SSH Honeypot",
     description:
-      "LLM-powered honeypot for attacker interaction and session logging.",
-    stack: ["React", "FastAPI", "Python", "Security"],
+      "A multi-modal LLM based SSH honeypot for attacker interaction and session analysis.",
+    stack: ["React", "FastAPI", "Python", "SQLite","Security"],
     image: "/projects/binarypot.png",
     liveUrl: "https://bpot-frontend.vercel.app/",
     githubUrl: "https://github.com/not-official/BinaryPot",
@@ -38,7 +38,7 @@ const projects: Project[] = [
     number: "02",
     name: "Not-Chess",
     type: "C++ Chess",
-    description: "Chess logic, movement rules, and C++ structure.",
+    description: "A unicode-enabled, console-based chess game.",
     stack: ["C++", "OOP", "Game Logic"],
     image: "/projects/notchess.png",
     githubUrl: "https://github.com/not-official/Not-Chess",
@@ -46,9 +46,9 @@ const projects: Project[] = [
   {
     number: "03",
     name: "SavorNepal",
-    type: "Food / Culture",
-    description: "A web project around Nepali food and culture.",
-    stack: ["React", "Next.js", "CSS"],
+    type: "Recipe Platform",
+    description: "A web project around Nepali food and recipes.",
+    stack: ["Express", "Next.js", "PostgreSQL"],
     image: "/projects/savornepal.png",
     liveUrl: "https://sn-frontend-mocha.vercel.app/",
     githubUrl: "https://github.com/samrat-dotel/SavorNepal",
@@ -136,29 +136,29 @@ const keyboardRows = [
 
 const phrases: Record<string, string> = {
   A: "Aman builds systems with intent.",
-  B: "BinaryPot studies attacker behavior.",
-  C: "C++ teaches structure and control.",
-  D: "Design makes software feel clear.",
-  E: "Every project begins with curiosity.",
-  F: "Frontend turns ideas into interfaces.",
-  G: "Good systems hide their complexity.",
-  H: "Human details make websites memorable.",
-  I: "Interfaces should feel simple.",
-  J: "JavaScript connects the experience.",
-  K: "Knowledge grows through building.",
-  L: "Logic becomes stronger through practice.",
-  M: "Minimal design needs strong decisions.",
-  N: "Not-Chess sharpens C++ thinking.",
-  O: "Objects, rules, and systems matter.",
-  P: "Projects show how I learn.",
-  Q: "Quality comes from refinement.",
-  R: "React helps shape interactive ideas.",
-  S: "SavorNepal explores food and culture.",
-  T: "Tools are only useful when applied.",
-  U: "Users remember how things feel.",
-  V: "Visual rhythm guides attention.",
+  B: "BinaryPot is my final year project.",
+  C: "Chess is fun only when I win.",
+  D: "Damn COVID still feels like 3 years ago.",
+  E: "Engineering wasn't half bad.",
+  F: "Freedom is what I seek.",
+  G: "Gently bullying bugs into submission.",
+  H: "How fast the time flies.",
+  I: "I still love her.",
+  J: "Just kidding, I don't.",
+  K: "Kinda genius when Wi-Fi works.",
+  L: "Life happens, regardless.",
+  M: "Music has my heart, code just borrows my brain.",
+  N: "Not-Chess has stockfish in it.",
+  O: "On my way to become great.",
+  P: "Purple, my favourite color",
+  Q: "Quality over quantity, always.",
+  R: "Ratatouille, also one of my favourites.",
+  S: "SavorNepal is my minor project.",
+  T: "True freedom is an illusion, yeah yeah.",
+  U: "Umbrella by Ember Island, another favourite.",
+  V: "Very calm as long as the code runs.",
   W: "Web interfaces are my playground.",
-  X: "X marks the next experiment.",
+  X: "X = curiosity + code + caffeine.",
   Y: "You entered through a puzzle.",
   Z: "Zero templates. Just built work.",
 };
@@ -166,7 +166,10 @@ const phrases: Record<string, string> = {
 const navItems = [
   ["Work", "#work"],
   ["About", "#about"],
-  ["Resume", "/Aman-CK-CV.pdf"],
+  [
+    "Resume",
+    "https://drive.google.com/file/d/1E6Z5ZP7-0BAsXdqZn2lRJBKJtsYVEHsM/view?usp=drive_link",
+  ],
   ["Contact", "#contact"],
 ];
 
@@ -398,7 +401,11 @@ export default function PortfolioPage() {
       }
 
       if (event.key === "3") {
-        window.open("/Aman-CK-CV.pdf", "_blank", "noopener,noreferrer");
+        window.open(
+          "https://drive.google.com/file/d/1E6Z5ZP7-0BAsXdqZn2lRJBKJtsYVEHsM/view?usp=drive_link",
+          "_blank",
+          "noopener,noreferrer"
+        );
       }
 
       if (event.key === "4") {
@@ -755,30 +762,29 @@ export default function PortfolioPage() {
 
             <div>
               <p className="max-w-2xl text-3xl font-semibold leading-[1.18] tracking-[-0.04em] text-[#171717] md:text-4xl md:leading-[1.25]">
-                I like building things that make ideas feel real.
+                Jack of all trades, master of figuring it out.
               </p>
 
               <div className="mt-6 space-y-5 text-sm leading-7 text-[#444] sm:text-base sm:leading-8 md:mt-7">
                 <p>
-                  I am Aman CK, a Computer Engineering graduate from
-                  Paschimanchal Campus. I am passionate about turning ideas into
-                  working software — whether that means writing C++ logic,
-                  designing clean interfaces, or connecting frontend experiences
-                  with backend systems.
+                  I am Aman CK, a Computer Engineering graduate from Paschimanchal Campus. I am still growing as a developer, but I enjoy 
+                  the process of learning, building, and improving. I work across C++ logic, frontend interfaces, and backend systems 
+                  because I like understanding how different parts of software come together.
                 </p>
 
                 <p>
-                  My projects are how I learn best. Not-Chess helps me think
-                  deeper about structure and problem solving, BinaryPot pushes me
-                  toward cybersecurity and backend systems, and SavorNepal lets
-                  me explore culture through web design. I care about building
-                  with intention, patience, and a clear eye for detail.
+                  Over the years, I have grown more confident in my decision to choose this field. I have explored different 
+                  areas of technology, from web development and clean interface design to backend systems and cybersecurity. 
+                  Through that journey, I have learned how to work with code, Git, GitHub, and the different tools and stacks 
+                  I have used across my projects. I am still growing, still learning, and still figuring out where 
+                  I can become truly great. And I believe every skill I build, every mistake I fix, and every project 
+                  I complete will connect in some way and help me become a better developer.
                 </p>
               </div>
 
               <div className="mt-7 flex flex-wrap gap-3 md:mt-8">
                 <a
-                  href="/Aman-CK-CV.pdf"
+                  href="https://drive.google.com/file/d/1E6Z5ZP7-0BAsXdqZn2lRJBKJtsYVEHsM/view?usp=drive_link"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="border border-[#171717] bg-[#171717] px-4 py-3 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-[#faf9f4] transition hover:bg-[#2563eb] hover:text-white md:px-5 md:text-[11px] md:tracking-[0.2em]"
