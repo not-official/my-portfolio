@@ -14,7 +14,7 @@ export default function ContactSection() {
       <div className="mx-auto w-full max-w-6xl border-t border-black/20 pt-12 md:pt-14">
         <SectionHeader label="Contact" title="Let's Connect" />
 
-        <div className="relative border-b border-black/30 pb-24 md:min-h-[270px] md:pb-0">
+        <div className="relative border-b border-black/20 pb-24 md:min-h-[270px] md:pb-0">
           <div className="flex flex-col items-end gap-4 md:block">
             <motion.div
               initial={{ opacity: 0, y: 24, filter: "blur(4px)" }}
