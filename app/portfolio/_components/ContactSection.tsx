@@ -12,7 +12,7 @@ export default function ContactSection() {
       className="relative z-10 px-4 pb-8 pt-16 sm:px-6 md:px-12 md:pt-20"
     >
       <div className="mx-auto w-full max-w-6xl border-t border-black/20 pt-12 md:pt-14">
-        <SectionHeader label="Contact" title="Let's Connect" />
+        <SectionHeader label="Contact" title="Let's connect" />
 
         <div className="relative border-b border-black/20 pb-24 md:min-h-[270px] md:pb-0">
           <div className="flex flex-col items-end gap-4 md:block">
