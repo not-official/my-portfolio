@@ -17,7 +17,7 @@ import type { NavItem, Project, Skill } from "../_types/portfolioTypes";
 export const TYPE_INTERVAL_MS = 74;
 
 export const RESUME_URL =
-  "https://drive.google.com/file/d/1E6Z5ZP7-0BAsXdqZn2lRJBKJtsYVEHsM/view?usp=drive_link";
+  "https://drive.google.com/file/d/1OLSlDBHkjD20CyqZc_foHgZt8myoj8Wo/view";
 
 export const projects: Project[] = [
   {
