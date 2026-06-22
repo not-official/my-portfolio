@@ -14,7 +14,7 @@ export default function StackSection() {
       id="stack"
       className="relative z-10 px-4 py-16 sm:px-6 md:px-12 md:py-20"
     >
-      <div className="mx-auto max-w-6xl border-t border-black/20 pt-12 md:pt-14">
+      <div className="mx-auto max-w-6xl border-t border-[var(--line)] pt-12 transition-colors duration-300 md:pt-14">
         <SectionHeader label="Stack" title="Tools" />
 
         <div className="relative min-h-[570px] md:min-h-[560px]">
@@ -60,22 +60,22 @@ export default function StackSection() {
                     y: -4,
                   }}
                   className={[
-                    "inline-flex w-[235px] items-center justify-between border bg-[#faf9f4] px-5 py-3.5 font-mono text-base lowercase tracking-[-0.03em] shadow-[7px_9px_0_rgba(0,0,0,0.08)]",
+                    "inline-flex w-[235px] items-center justify-between border bg-[var(--paper)] px-5 py-3.5 font-mono text-base lowercase tracking-[-0.03em] shadow-[7px_9px_0_rgba(0,0,0,0.08)] transition-colors duration-300",
                     "sm:w-[280px] sm:px-6 sm:text-lg",
                     "md:w-[335px] md:px-7 md:py-4 md:text-xl md:shadow-[8px_10px_0_rgba(0,0,0,0.08)]",
                     "will-change-transform transform-gpu",
                     isActive
-                      ? "border-[#2563eb] text-[#2563eb] shadow-[10px_14px_0_rgba(0,0,0,0.1)]"
-                      : "border-black/70 text-[#171717]",
+                      ? "border-[var(--accent)] text-[var(--accent)] shadow-[10px_14px_0_rgba(0,0,0,0.1)]"
+                      : "border-[var(--line-strong)] text-[var(--ink)]",
                   ].join(" ")}
                 >
                   <span className="flex items-center gap-3">
                     <span
                       className={[
-                        "flex h-8 w-8 items-center justify-center border transition-colors md:h-9 md:w-9",
+                        "flex h-8 w-8 items-center justify-center border transition-colors duration-300 md:h-9 md:w-9",
                         isActive
-                          ? "border-[#2563eb]/50 bg-[#2563eb]/5"
-                          : "border-black/15 bg-black/[0.02]",
+                          ? "border-[var(--accent)]/50 bg-[var(--accent)]/5"
+                          : "border-[var(--line)] bg-[var(--paper-soft)]",
                       ].join(" ")}
                     >
                       <SkillIcon className="h-4 w-4 md:h-5 md:w-5" />
@@ -84,7 +84,7 @@ export default function StackSection() {
                     <span>{skill.name}</span>
                   </span>
 
-                  <span className="text-[10px] uppercase tracking-[0.18em] text-[#777] md:text-xs md:tracking-[0.2em]">
+                  <span className="text-[10px] uppercase tracking-[0.18em] text-[var(--muted)] transition-colors duration-300 md:text-xs md:tracking-[0.2em]">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                 </motion.div>

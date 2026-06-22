@@ -14,7 +14,7 @@ export default function WorkSection() {
       id="work"
       className="relative z-10 px-4 py-16 sm:px-6 md:px-12 md:py-20"
     >
-      <div className="mx-auto max-w-6xl border-t border-black/20 pt-12 md:pt-14">
+      <div className="mx-auto max-w-6xl border-t border-[var(--line)] pt-12 transition-colors duration-300 md:pt-14">
         <SectionHeader label="Work" title="Featured projects" />
 
         <div className="grid gap-6 md:gap-7">

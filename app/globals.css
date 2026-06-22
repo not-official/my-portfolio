@@ -5,10 +5,78 @@
   --font-mono: var(--font-geist-mono);
 }
 
+:root {
+  --paper: #faf9f4;
+  --paper-soft: #ece7dc;
+  --ink: #171717;
+  --ink-soft: #2a2a2a;
+  --muted: #777777;
+  --muted-strong: #555555;
+
+  --line: rgba(0, 0, 0, 0.2);
+  --line-strong: rgba(0, 0, 0, 0.7);
+
+  --accent: #2563eb;
+  --card: rgba(250, 249, 244, 0.84);
+
+  --grid-line: rgba(0, 0, 0, 0.045);
+  --grid-dot: rgba(0, 0, 0, 0.16);
+
+  /* Typewriter */
+  --key-shell: #202020;
+  --key-shell-border: #1a1a1a;
+  --key-face: #eee7d9;
+  --key-face-border: #9f9688;
+  --key-text: #2f2f2f;
+  --key-highlight: rgba(255, 255, 255, 0.95);
+  --key-shadow: rgba(0, 0, 0, 0.18);
+}
+
+html.dark {
+  --paper: #121311;
+  --paper-soft: #1b1c19;
+  --ink: #f4f0e8;
+  --ink-soft: #e4ded3;
+  --muted: #aba69d;
+  --muted-strong: #ccc5b9;
+
+  --line: rgba(255, 255, 255, 0.14);
+  --line-strong: rgba(255, 255, 255, 0.42);
+
+  --accent: #8eaeff;
+  --card: rgba(24, 25, 22, 0.78);
+
+  --grid-line: rgba(255, 255, 255, 0.035);
+  --grid-dot: rgba(255, 255, 255, 0.1);
+
+  /* Typewriter — warm ivory keys on a charcoal shell */
+  --key-shell: #292b27;
+  --key-shell-border: #474942;
+  --key-face: #d9d2c5;
+  --key-face-border: #8d867a;
+  --key-text: #252521;
+  --key-highlight: rgba(255, 255, 255, 0.42);
+  --key-shadow: rgba(0, 0, 0, 0.42);
+}
+
 html {
   scroll-behavior: smooth;
 }
 
 body {
   margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  transition:
+    background-color 300ms ease,
+    color 300ms ease;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+::selection {
+  background: var(--accent);
+  color: white;
 }

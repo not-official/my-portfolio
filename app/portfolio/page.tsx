@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 
+import ThemeToggle from "../_components/ThemeToggle";
 import AboutSection from "./_components/AboutSection";
 import ContactSection from "./_components/ContactSection";
 import PortfolioHeader from "./_components/PortfolioHeader";
@@ -75,10 +76,12 @@ export default function PortfolioPage() {
   }, [activeLetter, selectLetter]);
 
   return (
-    <main className="min-h-screen overflow-x-hidden bg-[#faf9f4] text-[#171717]">
+    <main className="min-h-screen overflow-x-hidden bg-[var(--paper)] text-[var(--ink)] transition-colors duration-300">
+      <ThemeToggle />
+
       <div className="pointer-events-none fixed inset-0 opacity-60">
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.045)_1px,transparent_1px)] bg-[size:52px_52px] md:bg-[size:76px_76px]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(0,0,0,0.16)_1.2px,transparent_2px)] bg-[size:52px_52px] md:bg-[size:76px_76px]" />
+        <div className="absolute inset-0 bg-[linear-gradient(var(--grid-line)_1px,transparent_1px),linear-gradient(90deg,var(--grid-line)_1px,transparent_1px)] bg-[size:52px_52px] md:bg-[size:76px_76px]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle,var(--grid-dot)_1.2px,transparent_2px)] bg-[size:52px_52px] md:bg-[size:76px_76px]" />
       </div>
 
       <section className="relative z-10 min-h-screen px-4 py-5 sm:px-6 sm:py-6 md:px-12 md:py-7">

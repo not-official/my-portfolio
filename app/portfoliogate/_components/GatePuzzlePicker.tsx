@@ -21,10 +21,10 @@ export default function GatePuzzlePicker({
             key={puzzle.name}
             onClick={() => choosePuzzle(index)}
             className={[
-              "min-w-[86px] border px-3 py-2 font-mono text-[9px] font-semibold uppercase tracking-[0.14em] transition sm:min-w-[96px] sm:px-4 sm:text-[10px] sm:tracking-[0.16em]",
+              "min-w-[86px] border px-3 py-2 font-mono text-[9px] font-semibold uppercase tracking-[0.14em] transition-colors duration-300 sm:min-w-[96px] sm:px-4 sm:text-[10px] sm:tracking-[0.16em]",
               isActive
-                ? "border-[#171717] bg-[#171717] text-[#faf9f4]"
-                : "border-black/20 bg-[#faf9f4]/80 text-[#777] hover:border-[#2563eb] hover:text-[#2563eb]",
+                ? "border-[var(--ink)] bg-[var(--ink)] text-[var(--paper)]"
+                : "border-[var(--line)] bg-[var(--card)] text-[var(--muted)] hover:border-[var(--accent)] hover:text-[var(--accent)]",
             ].join(" ")}
           >
             {puzzle.name}

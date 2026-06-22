@@ -34,13 +34,13 @@ export default function GatePuzzleBoard({
         transition={{ duration: 0.55, ease: "easeOut" }}
         className="relative mx-auto w-full max-w-[min(100%,420px)] sm:max-w-[460px] md:max-w-[500px]"
       >
-        <div className="absolute -left-2 -top-2 z-0 h-full w-full border border-black/20 bg-[#ece7dc] sm:-left-3 sm:-top-3" />
+        <div className="absolute -left-2 -top-2 z-0 h-full w-full border border-[var(--line)] bg-[var(--paper-soft)] transition-colors duration-300 sm:-left-3 sm:-top-3" />
 
-        <div className="relative z-10 border border-black/25 bg-[#faf9f4]/85 p-2 backdrop-blur sm:p-3">
-          <div className="mb-2 flex items-center justify-between border-b border-black/15 pb-2 font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-[#777] sm:mb-3 sm:pb-3 sm:text-[10px] sm:tracking-[0.16em]">
+        <div className="relative z-10 border border-[var(--line)] bg-[var(--card)] p-2 backdrop-blur transition-colors duration-300 sm:p-3">
+          <div className="mb-2 flex items-center justify-between border-b border-[var(--line)] pb-2 font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-[var(--muted)] transition-colors duration-300 sm:mb-3 sm:pb-3 sm:text-[10px] sm:tracking-[0.16em]">
             <button
               onClick={resetPuzzle}
-              className="transition hover:text-[#2563eb]"
+              className="transition-colors duration-300 hover:text-[var(--accent)]"
             >
               Shuffle
             </button>
@@ -48,7 +48,7 @@ export default function GatePuzzleBoard({
             <span>{moves} Moves</span>
           </div>
 
-          <div className="relative aspect-square bg-[#171717] p-1.5 sm:p-2">
+          <div className="relative aspect-square bg-[var(--ink)] p-1.5 transition-colors duration-300 sm:p-2">
             <motion.div
               initial={false}
               animate={
@@ -130,10 +130,10 @@ export default function GatePuzzleBoard({
                   >
                     <div
                       className={[
-                        "relative h-full w-full overflow-hidden border bg-[#171717] transition",
+                        "relative h-full w-full overflow-hidden border bg-[var(--ink)] transition-colors duration-300",
                         isMovable
-                          ? "border-black/25 hover:border-[#2563eb]"
-                          : "border-black/20",
+                          ? "border-[var(--line)] hover:border-[var(--accent)]"
+                          : "border-[var(--line)]",
                       ].join(" ")}
                     >
                       <div
@@ -172,7 +172,7 @@ export default function GatePuzzleBoard({
           >
             <Link
               href="/portfolio"
-              className="inline-flex border border-[#171717] bg-[#171717] px-5 py-3 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-[#faf9f4] transition hover:bg-[#2563eb] hover:text-white sm:px-6 sm:text-[11px] sm:tracking-[0.22em]"
+              className="inline-flex border border-[var(--ink)] bg-[var(--ink)] px-5 py-3 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--paper)] transition-colors duration-300 hover:border-[var(--accent)] hover:bg-[var(--accent)] hover:text-white sm:px-6 sm:text-[11px] sm:tracking-[0.22em]"
             >
               Enter Portfolio
             </Link>

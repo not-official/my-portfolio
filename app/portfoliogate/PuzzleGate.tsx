@@ -78,8 +78,8 @@ export default function PuzzleGate() {
 
   if (!mounted || tiles.length === 0) {
     return (
-      <main className="flex min-h-screen items-center justify-center bg-[#faf9f4] text-[#171717]">
-        <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-[#777]">
+      <main className="flex min-h-screen items-center justify-center bg-[var(--paper)] text-[var(--ink)] transition-colors duration-300">
+        <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-[var(--muted)] transition-colors duration-300">
           Loading
         </p>
       </main>
@@ -87,10 +87,11 @@ export default function PuzzleGate() {
   }
 
   return (
-    <main className="relative min-h-screen overflow-x-hidden bg-[#faf9f4] text-[#171717]">
+    <main className="relative min-h-screen overflow-x-hidden bg-[var(--paper)] text-[var(--ink)] transition-colors duration-300">
       <div className="pointer-events-none absolute inset-0 opacity-60">
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.045)_1px,transparent_1px)] bg-[size:52px_52px] md:bg-[size:76px_76px]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(0,0,0,0.16)_1.2px,transparent_2px)] bg-[size:52px_52px] md:bg-[size:76px_76px]" />
+        <div className="absolute inset-0 bg-[linear-gradient(var(--grid-line)_1px,transparent_1px),linear-gradient(90deg,var(--grid-line)_1px,transparent_1px)] bg-[size:52px_52px] md:bg-[size:76px_76px]" />
+
+        <div className="absolute inset-0 bg-[radial-gradient(circle,var(--grid-dot)_1.2px,transparent_2px)] bg-[size:52px_52px] md:bg-[size:76px_76px]" />
       </div>
 
       <section className="relative z-10 flex min-h-screen flex-col px-4 py-5 sm:px-6 sm:py-6 md:px-12 md:py-7">
