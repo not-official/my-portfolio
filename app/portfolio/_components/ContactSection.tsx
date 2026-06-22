@@ -24,7 +24,7 @@ export default function ContactSection() {
                 duration: 0.5,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              className="md:absolute md:right-24 md:top-0"
+              className="relative md:absolute md:right-24 md:top-0"
             >
               <motion.a
                 href="https://github.com/not-official"
@@ -39,12 +39,12 @@ export default function ContactSection() {
                   damping: 24,
                   mass: 0.8,
                 }}
-                className="group relative inline-flex rotate-[-2deg] items-center gap-3 border border-[var(--line-strong)] bg-[var(--paper)] px-6 py-3 font-mono text-lg lowercase tracking-[-0.04em] text-[var(--ink)] will-change-transform transition-colors duration-300 hover:border-[var(--accent)] hover:text-[var(--accent)] focus:border-[var(--accent)] focus:text-[var(--accent)] md:rotate-[-7deg] md:px-8 md:text-xl"
+                className="group relative z-0 inline-flex rotate-[-2deg] items-center gap-3 border border-[var(--line-strong)] bg-[var(--paper)] px-6 py-3 font-mono text-lg lowercase tracking-[-0.04em] text-[var(--ink)] transition-colors duration-300 hover:z-20 hover:border-[var(--accent)] hover:text-[var(--accent)] focus:z-20 focus:border-[var(--accent)] focus:text-[var(--accent)] md:rotate-[-7deg] md:px-8 md:text-xl"
               >
                 <GitHubIcon />
                 github
 
-                <span className="pointer-events-none absolute bottom-full right-0 mb-3 translate-y-1 whitespace-nowrap border border-[var(--accent)]/40 bg-[var(--card)] px-3 py-2 font-mono text-[10px] font-semibold lowercase tracking-[0.08em] text-[var(--accent)] opacity-0 shadow-[5px_6px_0_rgba(0,0,0,0.06)] backdrop-blur transition duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-focus:translate-y-0 group-focus:opacity-100 md:right-auto md:left-1/2 md:-translate-x-1/2 md:group-hover:-translate-x-1/2 md:group-focus:-translate-x-1/2">
+                <span className="pointer-events-none absolute bottom-full right-0 z-30 mb-3 translate-y-1 whitespace-nowrap border border-[var(--accent)]/40 bg-[var(--card)] px-3 py-2 font-mono text-[10px] font-semibold lowercase tracking-[0.08em] text-[var(--accent)] opacity-0 shadow-[5px_6px_0_rgba(0,0,0,0.06)] backdrop-blur transition duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-focus:translate-y-0 group-focus:opacity-100 md:right-auto md:left-1/2 md:-translate-x-1/2 md:group-hover:-translate-x-1/2 md:group-focus:-translate-x-1/2">
                   not-official
                 </span>
               </motion.a>
@@ -59,7 +59,7 @@ export default function ContactSection() {
                 delay: 0.08,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              className="md:absolute md:right-0 md:top-16"
+              className="relative md:absolute md:right-0 md:top-16"
             >
               <motion.a
                 href="https://www.linkedin.com/in/aman-ck-1655bb410/"
@@ -74,12 +74,12 @@ export default function ContactSection() {
                   damping: 24,
                   mass: 0.8,
                 }}
-                className="group relative inline-flex rotate-[2deg] items-center gap-3 border border-[var(--line-strong)] bg-[var(--paper)] px-6 py-3 font-mono text-lg lowercase tracking-[-0.04em] text-[var(--ink)] will-change-transform transition-colors duration-300 hover:border-[var(--accent)] hover:text-[var(--accent)] focus:border-[var(--accent)] focus:text-[var(--accent)] md:rotate-[3deg] md:px-8 md:text-xl"
+                className="group relative z-0 inline-flex rotate-[2deg] items-center gap-3 border border-[var(--line-strong)] bg-[var(--paper)] px-6 py-3 font-mono text-lg lowercase tracking-[-0.04em] text-[var(--ink)] transition-colors duration-300 hover:z-20 hover:border-[var(--accent)] hover:text-[var(--accent)] focus:z-20 focus:border-[var(--accent)] focus:text-[var(--accent)] md:rotate-[3deg] md:px-8 md:text-xl"
               >
                 <LinkedInIcon />
                 linkedin
 
-                <span className="pointer-events-none absolute right-0 top-full mt-3 translate-y-1 whitespace-nowrap border border-[var(--accent)]/40 bg-[var(--card)] px-3 py-2 font-mono text-[10px] font-semibold tracking-[0.08em] text-[var(--accent)] opacity-0 shadow-[5px_6px_0_rgba(0,0,0,0.06)] backdrop-blur transition duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-focus:translate-y-0 group-focus:opacity-100 md:right-auto md:left-1/2 md:-translate-x-1/2 md:group-hover:-translate-x-1/2 md:group-focus:-translate-x-1/2">
+                <span className="pointer-events-none absolute bottom-full right-0 z-30 mb-3 translate-y-1 whitespace-nowrap border border-[var(--accent)]/40 bg-[var(--card)] px-3 py-2 font-mono text-[10px] font-semibold tracking-[0.08em] text-[var(--accent)] opacity-0 shadow-[5px_6px_0_rgba(0,0,0,0.06)] backdrop-blur transition duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-focus:translate-y-0 group-focus:opacity-100 md:bottom-auto md:right-auto md:left-1/2 md:top-full md:mt-3 md:-translate-x-1/2 md:group-hover:-translate-x-1/2 md:group-focus:-translate-x-1/2">
                   Aman CK
                 </span>
               </motion.a>
@@ -94,7 +94,7 @@ export default function ContactSection() {
                 delay: 0.16,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              className="md:absolute md:right-44 md:top-24"
+              className="relative md:absolute md:right-44 md:top-24"
             >
               <motion.a
                 href="mailto:ckaman108@gmail.com"
@@ -107,12 +107,12 @@ export default function ContactSection() {
                   damping: 24,
                   mass: 0.8,
                 }}
-                className="group relative inline-flex rotate-[-2deg] items-center gap-3 border border-[var(--line-strong)] bg-[var(--paper)] px-6 py-3 font-mono text-lg lowercase tracking-[-0.04em] text-[var(--ink)] will-change-transform transition-colors duration-300 hover:border-[var(--accent)] hover:text-[var(--accent)] focus:border-[var(--accent)] focus:text-[var(--accent)] md:rotate-[-4deg] md:px-8 md:text-xl"
+                className="group relative z-0 inline-flex rotate-[-2deg] items-center gap-3 border border-[var(--line-strong)] bg-[var(--paper)] px-6 py-3 font-mono text-lg lowercase tracking-[-0.04em] text-[var(--ink)] transition-colors duration-300 hover:z-20 hover:border-[var(--accent)] hover:text-[var(--accent)] focus:z-20 focus:border-[var(--accent)] focus:text-[var(--accent)] md:rotate-[-4deg] md:px-8 md:text-xl"
               >
                 <MailIcon />
                 email
 
-                <span className="pointer-events-none absolute right-0 top-full mt-3 translate-y-1 whitespace-nowrap border border-[var(--accent)]/40 bg-[var(--card)] px-3 py-2 font-mono text-[10px] font-semibold lowercase tracking-[0.08em] text-[var(--accent)] opacity-0 shadow-[5px_6px_0_rgba(0,0,0,0.06)] backdrop-blur transition duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-focus:translate-y-0 group-focus:opacity-100 md:right-auto md:left-1/2 md:-translate-x-1/2 md:group-hover:-translate-x-1/2 md:group-focus:-translate-x-1/2">
+                <span className="pointer-events-none absolute right-0 top-full z-30 mt-3 translate-y-1 whitespace-nowrap border border-[var(--accent)]/40 bg-[var(--card)] px-3 py-2 font-mono text-[10px] font-semibold lowercase tracking-[0.08em] text-[var(--accent)] opacity-0 shadow-[5px_6px_0_rgba(0,0,0,0.06)] backdrop-blur transition duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-focus:translate-y-0 group-focus:opacity-100 md:right-auto md:left-1/2 md:-translate-x-1/2 md:group-hover:-translate-x-1/2 md:group-focus:-translate-x-1/2">
                   ckaman108@gmail.com
                 </span>
               </motion.a>

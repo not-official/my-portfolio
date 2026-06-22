@@ -33,30 +33,30 @@
 }
 
 html.dark {
-  --paper: #121311;
-  --paper-soft: #1b1c19;
-  --ink: #f4f0e8;
-  --ink-soft: #e4ded3;
-  --muted: #aba69d;
-  --muted-strong: #ccc5b9;
+  --paper: #101113;
+  --paper-soft: #181a1f;
+  --ink: #f1f0ec;
+  --ink-soft: #dddcd6;
+  --muted: #a5a4a0;
+  --muted-strong: #c9c7c0;
 
-  --line: rgba(255, 255, 255, 0.14);
+  --line: rgba(255, 255, 255, 0.13);
   --line-strong: rgba(255, 255, 255, 0.42);
 
-  --accent: #8eaeff;
-  --card: rgba(24, 25, 22, 0.78);
+  --accent: #9b9cff;
+  --card: rgba(24, 26, 31, 0.8);
 
-  --grid-line: rgba(255, 255, 255, 0.035);
-  --grid-dot: rgba(255, 255, 255, 0.1);
+  --grid-line: rgba(255, 255, 255, 0.032);
+  --grid-dot: rgba(255, 255, 255, 0.095);
 
-  /* Typewriter — warm ivory keys on a charcoal shell */
-  --key-shell: #292b27;
-  --key-shell-border: #474942;
-  --key-face: #d9d2c5;
-  --key-face-border: #8d867a;
-  --key-text: #252521;
-  --key-highlight: rgba(255, 255, 255, 0.42);
-  --key-shadow: rgba(0, 0, 0, 0.42);
+  /* Typewriter */
+  --key-shell: #25262d;
+  --key-shell-border: #474954;
+  --key-face: #dedbd3;
+  --key-face-border: #96938c;
+  --key-text: #25252a;
+  --key-highlight: rgba(255, 255, 255, 0.48);
+  --key-shadow: rgba(0, 0, 0, 0.46);
 }
 
 html {
