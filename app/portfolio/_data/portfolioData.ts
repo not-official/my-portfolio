@@ -25,7 +25,7 @@ export const projects: Project[] = [
     name: "BinaryPot",
     type: "SSH Honeypot",
     description:
-      "A multi-modal LLM based SSH honeypot for attacker interaction and session analysis.",
+      "A multi-model LLM based SSH honeypot for attacker interaction and session analysis.",
     stack: ["React", "FastAPI", "Python", "SQLite", "Security"],
     image: "/projects/binarypot.png",
     liveUrl: "https://bpot-frontend.vercel.app/",
